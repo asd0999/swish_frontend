@@ -105,10 +105,16 @@ export default class App extends Component {
 
       peer.on("error", (err) => {
         console.log(err);
+        if (this.state.peerConnection) {
+          this.resetState();
+        }
       });
 
       peer.on("close", () => {
         console.log("peer connection closed");
+        if (this.state.peerConnection) {
+          this.resetState();
+        }
       });
     });
   }
@@ -155,10 +161,16 @@ export default class App extends Component {
 
     peer.on("error", (err) => {
       console.log(err);
+      if (this.state.peerConnection) {
+        this.resetState();
+      }
     });
 
     peer.on("close", () => {
       console.log("peer connection closed");
+      if (this.state.peerConnection) {
+        this.resetState();
+      }
     });
 
     peer.signal(callerData.signal);
