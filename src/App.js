@@ -95,8 +95,8 @@ export default class App extends Component {
 
       peer.on("data", (data) => {
         // message part
-        let string = new TextDecoder("utf-8").decode(data);
-        console.log(string);
+        // let string = new TextDecoder("utf-8").decode(data);
+        // console.log(string);
 
         // file part
         // console.log(data);
@@ -145,8 +145,8 @@ export default class App extends Component {
 
     peer.on("data", (data) => {
       //message part
-      let string = new TextDecoder("utf-8").decode(data);
-      console.log(string);
+      //   let string = new TextDecoder("utf-8").decode(data);
+      //   console.log(string);
 
       // file part
       // console.log(data);
@@ -249,8 +249,8 @@ export default class App extends Component {
   }
 
   sendLink(data) {
-    peer.send(data); //via peer
-    // socket.emit("link", data); //via socket
+    // peer.send(data); //via peer
+    socket.emit("link", data); //via socket
   }
 
   resetFile() {
