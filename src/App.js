@@ -100,7 +100,7 @@ export default class App extends Component {
 
         // file part
         // console.log(data);
-        // this.handleReceivingData(data);
+        this.handleReceivingData(data);
       });
 
       peer.on("error", (err) => {
@@ -149,8 +149,8 @@ export default class App extends Component {
       console.log(string);
 
       // file part
-      // console.log(typeof data, data);
-      //   this.handleReceivingData(data);
+      // console.log(data);
+      this.handleReceivingData(data);
     });
 
     peer.on("error", (err) => {
