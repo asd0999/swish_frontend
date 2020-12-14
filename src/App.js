@@ -95,12 +95,12 @@ export default class App extends Component {
 
       peer.on("data", (data) => {
         // message part
-        // let string = new TextDecoder("utf-8").decode(data);
-        // console.log(string);
+        let string = new TextDecoder("utf-8").decode(data);
+        console.log(string);
 
         // file part
         // console.log(data);
-        this.handleReceivingData(data);
+        // this.handleReceivingData(data);
       });
 
       peer.on("close", () => {
@@ -141,12 +141,12 @@ export default class App extends Component {
 
     peer.on("data", (data) => {
       //message part
-      // let string = new TextDecoder("utf-8").decode(data);
-      // console.log(string);
+      let string = new TextDecoder("utf-8").decode(data);
+      console.log(string);
 
       // file part
       // console.log(typeof data, data);
-      this.handleReceivingData(data);
+      //   this.handleReceivingData(data);
     });
 
     peer.on("close", () => {
@@ -241,8 +241,8 @@ export default class App extends Component {
   }
 
   sendLink(data) {
-    // peer.send(data); //via peer
-    socket.emit("link", data); //via socket
+    peer.send(data); //via peer
+    // socket.emit("link", data); //via socket
   }
 
   resetFile() {
