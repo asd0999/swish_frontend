@@ -103,6 +103,10 @@ export default class App extends Component {
         // this.handleReceivingData(data);
       });
 
+      peer.on("error", (err) => {
+        console.log(err);
+      });
+
       peer.on("close", () => {
         console.log("peer connection closed");
       });
@@ -147,6 +151,10 @@ export default class App extends Component {
       // file part
       // console.log(typeof data, data);
       //   this.handleReceivingData(data);
+    });
+
+    peer.on("error", (err) => {
+      console.log(err);
     });
 
     peer.on("close", () => {
