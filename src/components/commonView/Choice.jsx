@@ -8,18 +8,20 @@ export default class Choice extends Component {
         {this.props.peerConnection ? (
           <>
             <p>You are still connected to the paired device</p>
-            <button onClick={this.props.refreshPage}>CONNECT NEW DEVICE</button>
+            <button className="newDeviceBtn" onClick={this.props.refreshPage}>
+              CONNECT NEW DEVICE
+            </button>
             <Link to="/connected">
-              <button>BACK TO PAIRED DEVICE</button>
+              <button className="pairedDeviceBtn">BACK TO PAIRED DEVICE</button>
             </Link>
           </>
         ) : (
           <>
             <Link to="/send">
-              <button>SEND</button>
+              <button className="sendBtn">SEND</button>
             </Link>
             <Link to="/receive">
-              <button>RECEIVE</button>
+              <button className="receiveBtn">RECEIVE</button>
             </Link>
           </>
         )}
