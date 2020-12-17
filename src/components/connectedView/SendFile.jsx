@@ -43,7 +43,7 @@ export default class SendFile extends Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log("triggered function", props);
+    // console.log("triggered function", props);
     if (!props.file) {
       this.resetTransferingFile();
     }

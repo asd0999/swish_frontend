@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SendLink from "./SendLink";
 import SendFile from "./SendFile";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Inbox from "./Inbox";
 import { Spring } from "react-spring/renderprops";
 
@@ -47,6 +47,34 @@ export default class DataTransfer extends Component {
             </div>
           </>
         ) : (
+          // <>
+          //   <Spring
+          //     from={{ opacity: 0, marginTop: -200 }}
+          //     to={{ opacity: 1, marginTop: 12 }}
+          //     config={{ delay: 200, duration: 400 }}
+          //   >
+          //     {(props) => (
+          //       <div className="peerClosed" style={props}>
+          //         <h2>Connection closed</h2>
+          //         <br />
+          //         Either there was a problem or the peer has disconnected
+          //       </div>
+          //     )}
+          //   </Spring>
+          //   <Spring
+          //     from={{ opacity: 0 }}
+          //     to={{ opacity: 1 }}
+          //     config={{ delay: 800, duration: 400 }}
+          //   >
+          //     {(props) => (
+          //       <div className="peerClosed" style={props}>
+          //         <Link to="/">
+          //           <button>HOME</button>
+          //         </Link>
+          //       </div>
+          //     )}
+          //   </Spring>
+          // </>
           <Redirect to="/" />
         )}
       </>

@@ -86,6 +86,13 @@ export default class App extends Component {
       });
     });
 
+    peer.on("error", (error) => {
+      console.log(error);
+      // this.setState({
+      //   peerConnection: false,
+      // });
+    });
+
     socket.on("callAccepted", (signal) => {
       console.log("Call accepted, peer connection established");
       this.setState({
@@ -105,6 +112,9 @@ export default class App extends Component {
 
       peer.on("close", () => {
         console.log("peer connection closed");
+        this.setState({
+          peerConnection: false,
+        });
       });
     });
   }
@@ -139,6 +149,13 @@ export default class App extends Component {
       console.log("Call accepted, peer connection established");
     });
 
+    peer.on("error", (error) => {
+      console.log(error);
+      // this.setState({
+      //   peerConnection: false,
+      // });
+    });
+
     peer.on("data", (data) => {
       //message part
       // let string = new TextDecoder("utf-8").decode(data);
@@ -151,6 +168,9 @@ export default class App extends Component {
 
     peer.on("close", () => {
       console.log("peer connection closed");
+      this.setState({
+        peerConnection: false,
+      });
     });
 
     peer.signal(callerData.signal);
@@ -349,9 +369,11 @@ export default class App extends Component {
       otp: null,
       peer_sid: null,
       file: undefined,
+      OTPaccepted: false,
     });
     peer = null;
     socket.emit("peerDisconnected");
+    this.refreshPage();
   }
 
   refreshPage() {
@@ -365,15 +387,16 @@ export default class App extends Component {
           <BrowserRouter>
             <Header
               peerConnection={this.state.peerConnection}
+              resetState={this.resetState}
               refreshPage={this.refreshPage}
-            />
+            />{" "}
             <Switch>
               <Route exact path="/">
                 <LandingPage
                   peerConnection={this.state.peerConnection}
                   refreshPage={this.refreshPage}
-                />
-              </Route>
+                />{" "}
+              </Route>{" "}
               <Route
                 path="/generate-otp"
                 render={(props) => (
@@ -384,10 +407,10 @@ export default class App extends Component {
                       otp={this.state.otp}
                       peerConnection={this.state.peerConnection}
                       initiator={this.initiator}
-                    />
+                    />{" "}
                   </div>
                 )}
-              />
+              />{" "}
               <Route
                 path="/enter-otp"
                 render={(props) => (
@@ -399,10 +422,10 @@ export default class App extends Component {
                       wrongOTP={this.state.wrongOTP}
                       resetWrongOTP={this.resetWrongOTP}
                       OTPaccepted={this.state.OTPaccepted}
-                    />
+                    />{" "}
                   </div>
                 )}
-              />
+              />{" "}
               <Route
                 path="/connected"
                 render={(props) => (
@@ -418,17 +441,17 @@ export default class App extends Component {
                       resetFile={this.resetFile}
                       file={this.state.file}
                       linkReceived={this.state.linkReceived}
-                    />
+                    />{" "}
                   </>
                 )}
-              />
-            </Switch>
-          </BrowserRouter>
-          {/* <div className="footer"></div> */}
-        </div>
+              />{" "}
+            </Switch>{" "}
+          </BrowserRouter>{" "}
+          {/* <div className="footer"></div> */}{" "}
+        </div>{" "}
         <div className="cover-image">
           <AboutInfo />
-        </div>
+        </div>{" "}
       </div>
     );
   }

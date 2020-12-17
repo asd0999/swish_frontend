@@ -336,8 +336,8 @@ a:active {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 150px;
-    margin-top: 44px;
+    height: 170px;
+    margin-top: 64px;
 }
 
 .inbox {
@@ -345,8 +345,6 @@ a:active {
     border-radius: 4px;
     text-align: center;
     cursor: default;
-    position: relative;
-    top: 16px;
     height: 100%;
     width: 250px;
     padding-top: 0px;
@@ -356,10 +354,10 @@ a:active {
     display: flex;
     justify-content: center;
     margin: auto;
-    margin-top: 10px;
-    margin-bottom: -12px;
+    margin-top: 20px;
     overflow: hidden;
     font-size: 13.3px;
+    height: 34px;
 }
 
 .linkReceived a {
@@ -367,8 +365,6 @@ a:active {
     border-bottom: none;
     text-align: center;
     margin: auto;
-    margin-top: 10px;
-    margin-bottom: -12px;
     overflow: hidden;
     font-size: 13.3px;
 }
@@ -381,6 +377,7 @@ a:active {
     background-color: rgba(4, 4, 4, 0);
     color: var(--text2);
     cursor: default;
+    margin-top: 18px;
 }
 
 .noFile:hover {
@@ -405,6 +402,10 @@ a:active {
 #disconnect:hover {
     background-color: var(--contrast);
     color: var(--text1);
+}
+
+.peerClosed {
+    text-align: center;
 }
 
 
