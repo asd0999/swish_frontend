@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-// import { Redirect } from "react-router-dom";
 import Connecting from "../commonView/Connecting";
-// import PageHeading from "../commonView/PageHeading";
 import { Spring } from "react-spring/renderprops";
 
 export default class ShowOTP extends Component {
@@ -15,8 +13,8 @@ export default class ShowOTP extends Component {
       <>
         {this.props.peerConnection ? (
           <>
-            <h2> OTP verified</h2>
-            <span className="instruction"> Setting up P2P connection</span>
+            <h2>Connecting to device</h2>
+            <span className="instruction">OTP verified</span>
             <Connecting peerConnection={this.props.peerConnection} />
           </>
         ) : (

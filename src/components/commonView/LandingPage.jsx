@@ -9,29 +9,33 @@ export default class LandingPage extends Component {
         <Spring
           from={{ opacity: 0 }}
           to={{ opacity: 1 }}
-          config={{ delay: 1200, duration: 1000 }}
+          config={{ delay: 600, duration: 600 }}
         >
           {(props) => (
             <div style={props}>
-              <p>Share URLs and files between devices</p>
-              <p>Password free</p>
-              <p>Convinient</p>
-              <p>Secure</p>
+              <h2 className="by-line">
+                Sharing across devices
+                <br />
+                Made simple{" "}
+              </h2>
             </div>
           )}
         </Spring>
         <Spring
-          from={{ opacity: 0 }}
-          to={{ opacity: 1 }}
-          config={{ delay: 100, duration: 100 }}
+          from={{ opacity: 0, marginTop: -20 }}
+          to={{ opacity: 1, marginTop: 4 }}
+          config={{ delay: 800, duration: 300 }}
         >
           {(props) => (
-            <div className="choiceBtns" style={props}>
-              <Choice
-                peerConnection={this.props.peerConnection}
-                refreshPage={this.props.refreshPage}
-              />
-            </div>
+            <>
+              {/* <p style={props}>Get started!</p> */}
+              <div className="choiceBtns" style={props}>
+                <Choice
+                  peerConnection={this.props.peerConnection}
+                  refreshPage={this.props.refreshPage}
+                />
+              </div>
+            </>
           )}
         </Spring>
       </div>

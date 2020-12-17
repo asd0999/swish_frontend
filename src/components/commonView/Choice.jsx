@@ -4,28 +4,31 @@ import { Link } from "react-router-dom";
 export default class Choice extends Component {
   render() {
     return (
-      <div>
+      <>
         {this.props.peerConnection ? (
           <>
             <p>You are still connected to the paired device</p>
-            <button className="newDeviceBtn" onClick={this.props.refreshPage}>
-              CONNECT NEW DEVICE
-            </button>
+            <Link>
+              <button className="newDeviceBtn" onClick={this.props.refreshPage}>
+                CONNECT NEW DEVICE
+              </button>
+            </Link>
             <Link to="/connected">
               <button className="pairedDeviceBtn">BACK TO PAIRED DEVICE</button>
             </Link>
           </>
         ) : (
           <>
-            <Link to="/send">
-              <button className="sendBtn">SEND</button>
+            <p>Get started!</p>
+            <Link to="/generate-otp">
+              <button className="sendBtn">GENERATE OTP</button>
             </Link>
-            <Link to="/receive">
-              <button className="receiveBtn">RECEIVE</button>
+            <Link to="/enter-otp">
+              <button className="receiveBtn">ENTER OTP</button>
             </Link>
           </>
         )}
-      </div>
+      </>
     );
   }
 }

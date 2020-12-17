@@ -5,23 +5,24 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ShowOTP from "./components/senderView/ShowOTP";
 import EnterOTP from "./components/receiverView/EnterOTP";
 import streamSaver from "streamsaver";
-import DataTransfer from "./components/commonView/DataTransfer";
+import DataTransfer from "./components/connectedView/DataTransfer";
 import Header from "./components/commonView/Header";
 import LandingPage from "./components/commonView/LandingPage";
+import AboutInfo from "./components/commonView/AboutInfo";
 
 let peer = null;
 const worker = new Worker("../worker.js");
 console.log(worker);
 
 //dev
-// const socket = io("http://localhost:4000", {
-//   transports: ["websocket"],
-// });
-
-//prod
-const socket = io("https://swish-server-api.herokuapp.com/", {
+const socket = io("http://localhost:4000", {
   transports: ["websocket"],
 });
+
+//prod
+// const socket = io("https://swish-server-api.herokuapp.com/", {
+//   transports: ["websocket"],
+// });
 
 export default class App extends Component {
   constructor() {
@@ -35,6 +36,7 @@ export default class App extends Component {
       initiator: false,
       wrongOTP: false,
       OTPaccepted: false,
+      file: undefined,
     };
     this.checkApi = this.checkApi.bind(this);
     this.requestOTP = this.requestOTP.bind(this);
@@ -176,6 +178,7 @@ export default class App extends Component {
 
       socket.on("link", (data) => {
         console.log(data);
+        this.setState({ linkReceived: data });
       });
 
       socket.on("otp", (otp) => {
@@ -258,7 +261,7 @@ export default class App extends Component {
 
   resetFile() {
     this.setState({
-      file: null,
+      file: false,
     });
   }
 
@@ -269,16 +272,17 @@ export default class App extends Component {
   }
 
   sendFile() {
+    let self = this; //ignore linter
     if (this.state.file) {
       const self = this;
       const stream = this.state.file.stream();
       const reader = stream.getReader();
 
       reader.read().then((obj) => {
-        handleReading(obj.done, obj.value);
+        handleReading(obj.done, obj.value, self);
       });
 
-      function handleReading(done, value) {
+      function handleReading(done, value, self) {
         if (done) {
           peer.send(
             JSON.stringify({
@@ -287,15 +291,20 @@ export default class App extends Component {
             })
           );
           console.log("sent EOF chunk");
+          setTimeout(() => {
+            self.setState({
+              file: false,
+            });
+          }, 3000); //time for animation
           return;
+        } else {
+          peer.write(value);
+          // console.log(value);
+          console.log("sent a chunk");
+          reader.read().then((obj) => {
+            handleReading(obj.done, obj.value, self);
+          });
         }
-
-        peer.write(value);
-        // console.log(value);
-        console.log("sent a chunk");
-        reader.read().then((obj) => {
-          handleReading(obj.done, obj.value);
-        });
       }
     }
   }
@@ -339,7 +348,7 @@ export default class App extends Component {
       peerConnection: false,
       otp: null,
       peer_sid: null,
-      file: null,
+      file: undefined,
     });
     peer = null;
     socket.emit("peerDisconnected");
@@ -351,65 +360,75 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <BrowserRouter>
-          <Header />
-          <Switch>
-            <Route exact path="/">
-              <LandingPage
-                peerConnection={this.state.peerConnection}
-                refreshPage={this.refreshPage}
+      <div className="outer">
+        <div className="container">
+          <BrowserRouter>
+            <Header
+              peerConnection={this.state.peerConnection}
+              refreshPage={this.refreshPage}
+            />
+            <Switch>
+              <Route exact path="/">
+                <LandingPage
+                  peerConnection={this.state.peerConnection}
+                  refreshPage={this.refreshPage}
+                />
+              </Route>
+              <Route
+                path="/generate-otp"
+                render={(props) => (
+                  <div className="pairing-div">
+                    <ShowOTP
+                      {...props}
+                      requestOTP={this.requestOTP}
+                      otp={this.state.otp}
+                      peerConnection={this.state.peerConnection}
+                      initiator={this.initiator}
+                    />
+                  </div>
+                )}
               />
-            </Route>
-            <Route
-              path="/send"
-              render={(props) => (
-                <div className="pairing-div">
-                  <ShowOTP
-                    {...props}
-                    requestOTP={this.requestOTP}
-                    otp={this.state.otp}
-                    peerConnection={this.state.peerConnection}
-                    initiator={this.initiator}
-                  />
-                </div>
-              )}
-            />
-            <Route
-              path="/receive"
-              render={(props) => (
-                <div className="pairing-div">
-                  <EnterOTP
-                    {...props}
-                    pairPeers={this.pairPeers}
-                    peerConnection={this.state.peerConnection}
-                    wrongOTP={this.state.wrongOTP}
-                    resetWrongOTP={this.resetWrongOTP}
-                    OTPaccepted={this.state.OTPaccepted}
-                  />
-                </div>
-              )}
-            />
-            <Route
-              path="/connected"
-              render={(props) => (
-                <>
-                  <DataTransfer
-                    {...props}
-                    peerConnection={this.state.peerConnection}
-                    sendLink={this.sendLink}
-                    gotFile={this.state.gotFile}
-                    sendFile={this.sendFile}
-                    selectFile={this.selectFile}
-                    download={this.download}
-                    resetFile={this.resetFile}
-                    file={this.state.file}
-                  />
-                </>
-              )}
-            />
-          </Switch>
-        </BrowserRouter>
+              <Route
+                path="/enter-otp"
+                render={(props) => (
+                  <div className="pairing-div">
+                    <EnterOTP
+                      {...props}
+                      pairPeers={this.pairPeers}
+                      peerConnection={this.state.peerConnection}
+                      wrongOTP={this.state.wrongOTP}
+                      resetWrongOTP={this.resetWrongOTP}
+                      OTPaccepted={this.state.OTPaccepted}
+                    />
+                  </div>
+                )}
+              />
+              <Route
+                path="/connected"
+                render={(props) => (
+                  <>
+                    <DataTransfer
+                      {...props}
+                      peerConnection={this.state.peerConnection}
+                      sendLink={this.sendLink}
+                      gotFile={this.state.gotFile}
+                      sendFile={this.sendFile}
+                      selectFile={this.selectFile}
+                      download={this.download}
+                      resetFile={this.resetFile}
+                      file={this.state.file}
+                      linkReceived={this.state.linkReceived}
+                    />
+                  </>
+                )}
+              />
+            </Switch>
+          </BrowserRouter>
+          {/* <div className="footer"></div> */}
+        </div>
+        <div className="cover-image">
+          <AboutInfo />
+        </div>
       </div>
     );
   }
