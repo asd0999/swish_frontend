@@ -15,14 +15,14 @@ const worker = new Worker("../worker.js");
 console.log(worker);
 
 //dev
-const socket = io("http://localhost:4000", {
-  transports: ["websocket"],
-});
-
-//prod
-// const socket = io("https://swish-server-api.herokuapp.com/", {
+// const socket = io("http://localhost:4000", {
 //   transports: ["websocket"],
 // });
+
+//prod
+const socket = io("https://swish-server-api.herokuapp.com/", {
+  transports: ["websocket"],
+});
 
 export default class App extends Component {
   constructor() {
