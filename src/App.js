@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Peer from "simple-peer";
 import { io } from "socket.io-client";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ShowOTP from "./components/senderView/ShowOTP";
 import EnterOTP from "./components/receiverView/EnterOTP";
 import streamSaver from "streamsaver";

@@ -27,7 +27,7 @@ export default class AboutInfo extends Component {
               <li>After transfer, click "disconnect" or simply refresh page</li>
             </ol>
           </div>
-          <div id="more-info">
+          <div id="madewithlove">
             <div id="icons"></div>
             Made with louu using Node + React
           </div>

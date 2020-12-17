@@ -444,8 +444,7 @@ a:active {
 #title,
 #el-pitch,
 #list,
-#startby,
-#more-info {
+#startby {
     margin-bottom: 30px;
 }
 
@@ -484,8 +483,9 @@ hr {
     margin: 10px 0 0 30px;
 }
 
-#more-info {
-    margin-top: 70px;
+#madewithlove {
+    position: absolute;
+    bottom: 40px;
     font-size: 16px;
     font-family: "Open Sans", sans-serif;
 }
