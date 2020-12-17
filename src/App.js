@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Peer from "simple-peer";
 import { io } from "socket.io-client";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import ShowOTP from "./components/senderView/ShowOTP";
 import EnterOTP from "./components/receiverView/EnterOTP";
 import streamSaver from "streamsaver";
@@ -292,6 +292,7 @@ export default class App extends Component {
   }
 
   sendFile() {
+    // eslint-disable-next-line no-unused-vars
     let self = this; //ignore linter
     if (this.state.file) {
       const self = this;
@@ -447,7 +448,17 @@ export default class App extends Component {
               />{" "}
             </Switch>{" "}
           </BrowserRouter>{" "}
-          {/* <div className="footer"></div> */}{" "}
+          <div className="footer">
+            <a href="https://github.com/asd0999/swish" target="_blank">
+              <img src="../github.png" alt="linkedin" id="github" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/tushar-goyal-0999/"
+              target="_blank"
+            >
+              <img src="../linkedin.png" alt="linkedin" id="linkedin" />
+            </a>
+          </div>{" "}
         </div>{" "}
         <div className="cover-image">
           <AboutInfo />

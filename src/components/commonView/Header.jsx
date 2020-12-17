@@ -17,13 +17,14 @@ export default class Header extends Component {
     return (
       <div className="heading">
         <Spring
-          from={{ opacity: 0, marginLeft: -100 }}
-          to={{ opacity: 1, marginLeft: 20 }}
+          from={{ opacity: 0, marginLeft: -100, marginTop: 36 }}
+          to={{ opacity: 1, marginLeft: 20, marginTop: 36 }}
           config={{ duration: 600 }}
         >
           {(props) => (
             <div style={props}>
-              <h1>SW</h1>
+              <img src="../swish-logo.jpeg" alt="swish-logo" id="logo-small" />
+              <span id="logo-wish">wish</span>
             </div>
           )}
         </Spring>

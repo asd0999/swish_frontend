@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
-@import url("https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Satisfy&display=swap");
 :root {
     // --background: #fcdf12;
     --background: #fadb14;
@@ -36,6 +36,21 @@ body {
     background-color: var(--background);
 }
 
+#logo-small {
+    width: 100px;
+    transform: rotate(15deg);
+    margin-left: -30px;
+}
+
+#logo-wish {
+    // font-family: "Pacifico", cursive;
+    font-family: "Satisfy", cursive;
+    font-size: 48px;
+    position: relative;
+    left: -39px;
+    top: -5px;
+}
+
 .cover-image {
     width: 64%;
     height: 100vh;
@@ -55,12 +70,23 @@ body {
 }
 
 .footer {
-    width: 36%;
+    width: 100%;
     height: 64px;
-    display: none;
-    background-color: var(--contrast);
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-evenly;
     position: absolute;
     bottom: 0;
+    // border: 1px solid blue;
+}
+
+#github {
+    width: 80px;
+}
+
+#linkedin {
+    width: 86px;
 }
 
 .heading {
@@ -80,6 +106,7 @@ body {
 
 .by-line {
     margin-bottom: 60px;
+    margin-top: 50px;
 }
 
 .instruction {
@@ -101,16 +128,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 50px;
 }
 
 .refresh-otp {
     width: 140px;
     height: 40px;
     border-radius: 4px;
-    // margin-bottom: 40px;
     border: none;
-    // border-bottom: 1px solid grey;
-    /* box-shadow: 0px 2px 4px grey; */
+    position: relative;
+    top: 20px;
 }
 
 input[type="text"] {
@@ -129,8 +156,8 @@ input[type="text"] {
 #otp {
     text-align: center;
     color: var(--text2);
-    position: absolute;
-    top: 232px;
+    position: relative;
+    top: 32px;
 }
 
 #otp:focus {
@@ -143,8 +170,8 @@ input[type="text"] {
 }
 
 .otp {
-    position: absolute;
-    top: 232px;
+    position: relative;
+    top: 32px;
     margin: 0 0 0 10px;
     color: var(--text2);
 }
@@ -223,19 +250,14 @@ input[type="file"] {
 }
 
 #pairBtn {
-    position: absolute;
-    top: 280px;
+    position: relative;
+    top: 34px;
 }
 
 .choiceBtns {
     // position: absolute;
     // top: 260px;
     margin-top: 100px;
-}
-
-.refresh-otp {
-    position: absolute;
-    top: 258px;
 }
 
 .extra-div {
@@ -415,7 +437,8 @@ a:active {
 .aboutInfo {
     padding: 40px;
     color: var(--background);
-    margin-top: 86px;
+    margin-top: 56px;
+    text-align: justify;
 }
 
 #title,
@@ -426,6 +449,22 @@ a:active {
     margin-bottom: 30px;
 }
 
+#title {
+    position: relative;
+    top: -12px;
+}
+
+hr {
+    width: 600px;
+    border: 2px solid var(--background);
+    position: relative;
+    bottom: 36px;
+}
+
+#el-pitch {
+    max-width: 600px;
+}
+
 #list li {
     margin: 10px 0 0 30px;
     font-size: 20px;
@@ -434,10 +473,19 @@ a:active {
 #startby {
     margin-top: 60px;
     font-size: 20px;
+    max-width: 600px;
+    color: var(--text2);
+    background-color: var(--background);
+    padding: 8px 8px;
+    border-radius: 4px;
+}
+
+#startby li {
+    margin: 10px 0 0 30px;
 }
 
 #more-info {
-    margin-top: 60px;
+    margin-top: 70px;
     font-size: 16px;
     font-family: "Open Sans", sans-serif;
 }
@@ -555,10 +603,10 @@ a:active {
         width: 36%;
         min-width: 420px;
     }
-    .cover-image {
-        display: inline;
-    }
     .footer {
+        width: 36%;
+    }
+    .cover-image {
         display: inline;
     }
 }
